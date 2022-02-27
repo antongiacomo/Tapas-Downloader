@@ -1,11 +1,25 @@
+body{
+  padding: 3em;
+}
 button {
-  height: 40px;
-  width: 80px;
+
   outline: none;
   border: none;
-  border-radius: 100px;
+  border-radius: 8px;
   cursor: pointer;
+  background-color: #60a5fa;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
+  padding: 0.5em;
+  font-size: 1.3em;
+  font-weight: 500;
+
+
+}
+button:hover{
+  background-color: #3b82f6;
+  border: 2px solid #3b82f6;
 }
 #buttonDiv{
   display: flex;
@@ -14,4 +28,23 @@ button {
 button.current {
   box-shadow: 0 0 0 2px white,
               0 0 0 4px black;
+}
+#imgs{
+  display: flex;
+  flex-wrap: wrap;
+  width: 550px;
+  margin-bottom: 1em;
+  gap: 1rem;
+
+}
+#imgs img{
+  width: 120px;
+  border-radius: 8px;
+
+}
+
+.text{
+  font-weight: 500;
+  font-size: 1.5em;
+  padding-bottom: 0.5em;
 }
