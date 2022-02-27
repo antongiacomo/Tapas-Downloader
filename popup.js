@@ -1,8 +1,7 @@
 // Initialize butotn with users's prefered color
-let changeColor = document.getElementById("changeColor");
-let img = document.getElementById("button_img");
+let downloadButton = document.getElementById("download-button");
 var block = document.getElementById("imgs");
-
+var imageUrlList = [];
 chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
   chrome.scripting.executeScript(
     {
@@ -11,8 +10,9 @@ chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
     },
     (urls) => {
       for (const frameResult of urls) {
-        urls = frameResult.result;
-        var imgs = urls.map(function (URL) {
+        imageUrlList = frameResult.result;
+
+        var imgs = imageUrlList.map(function (URL) {
           var img = document.createElement("img");
           img.src = URL;
           block.appendChild(img);
@@ -23,18 +23,19 @@ chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
   );
 });
 
-changeColor.addEventListener("click", async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    function: setPageBackgroundColor,
-  });
+downloadButton.addEventListener("click", async () => {
+  downloadImages(imageUrlList);
 });
 
 // The body of this function will be execuetd as a content script inside the
 // current page
 function loadImages() {
+  const filterUrl = (imgs) => {
+    urls = [].map.call(imgs, (img) => img.src);
+    urls = urls.filter((url) => isValidHttpUrl(url));
+    return urls;
+  };
+
   function isValidHttpUrl(string) {
     let url;
 
@@ -48,31 +49,12 @@ function loadImages() {
   }
 
   imgs = document.getElementsByClassName("content__img");
-  urls = [].map.call(imgs, (img) => img.src);
-  urls = urls.filter((url) => isValidHttpUrl(url));
-  chrome.storage.local.set({ urls: urls });
+  urls = filterUrl(imgs);
+  // chrome.storage.local.set({ urls: urls });
 
   return urls;
 }
 
-function setPageBackgroundColor() {
-  function isValidHttpUrl(string) {
-    let url;
-
-    try {
-      url = new URL(string);
-    } catch (_) {
-      return false;
-    }
-
-    return url.protocol === "http:" || url.protocol === "https:";
-  }
-
-  imgs = document.getElementsByClassName("content__img");
-  urls = [].map.call(imgs, (img) => img.src);
-  urls = urls.filter((url) => isValidHttpUrl(url));
-
-  console.log(urls);
-  chrome.storage.sync.set({ urls });
+function downloadImages(urls) {
   chrome.runtime.sendMessage(urls);
 }

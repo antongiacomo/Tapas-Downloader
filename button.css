@@ -57,7 +57,7 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   width: 550px;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   gap: 1rem;
 
 
@@ -81,7 +81,7 @@ button:hover {
   padding-bottom: 0.5em;
 }
 
-#changeColor {
+#download-button {
   display: flex;
   gap:0.5rem;
   align-items: center;
