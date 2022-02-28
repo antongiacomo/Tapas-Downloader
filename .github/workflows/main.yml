@@ -18,6 +18,8 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -36,3 +38,6 @@ jobs:
           zipFilePath: 'build/extension.zip'
           crxFilePath: 'build/extension.crx'
           privateKey: ${{ secrets.CHROME_CRX_PRIVATE_KEY }}
+      - uses: rymndhng/release-on-push-action@master
+        with:
+          bump_version_scheme: minor
