@@ -19,11 +19,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: ls
+        run: ls
       # pack zip and read manifest, can be reused in the following steps
       - id: packExtensionDir
         uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
         with:
-          extensionDir: '../../'
+          extensionDir: '.'
           zipFilePath: 'build/extension.zip'
 
       - uses: cardinalby/webext-buildtools-chrome-crx-action@v2
