@@ -17,7 +17,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       # pack zip and read manifest, can be reused in the following steps
       - id: packExtensionDir
