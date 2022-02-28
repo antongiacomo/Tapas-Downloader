@@ -42,8 +42,5 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /home/runner/work/Tapas-Downloader/Tapas-Downloader/build/extension.crx
-          asset_name: TapasDownloader
+          file: ./build/extension.crx
           tag: ${{ github.ref }}
-          overwrite: true
-          body: "This is my release text"
