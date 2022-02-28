@@ -40,4 +40,5 @@ jobs:
           privateKey: ${{ secrets.CHROME_CRX_PRIVATE_KEY }}
       - uses: rymndhng/release-on-push-action@master
         with:
+          working-directory: build
           bump_version_scheme: minor
