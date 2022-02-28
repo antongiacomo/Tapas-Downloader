@@ -38,7 +38,12 @@ jobs:
           zipFilePath: 'build/extension.zip'
           crxFilePath: 'build/extension.crx'
           privateKey: ${{ secrets.CHROME_CRX_PRIVATE_KEY }}
-      - uses: rymndhng/release-on-push-action@master
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          working-directory: build
-          bump_version_scheme: minor
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/*.crx
+          asset_name: TapasDownloader
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
