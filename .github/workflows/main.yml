@@ -23,7 +23,7 @@ jobs:
       - id: packExtensionDir
         uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
         with:
-          extensionDir: '.'
+          extensionDir: '../'
           zipFilePath: 'build/extension.zip'
 
       - uses: cardinalby/webext-buildtools-chrome-crx-action@v2
