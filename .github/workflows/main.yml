@@ -42,7 +42,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/*.crx
+          file: /home/runner/work/Tapas-Downloader/Tapas-Downloader/build/extension.crx
           asset_name: TapasDownloader
           tag: ${{ github.ref }}
           overwrite: true
